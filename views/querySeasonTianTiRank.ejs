@@ -1,0 +1,125 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <% if (stash.area & 1) { %>
+                        <div class="control-group">
+                            <label class="control-label">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</label>
+                            <div class="controls">
+                                <select class="form-control" name="version">
+                                    <option value='1'<%= stash.version==1? "selected": "1" %> >安卓</option>
+                                    <option value='2'<%= stash.version==2? "selected": "2" %> >IOS</option>
+                                </select>
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" name="">天梯赛季</label>
+                        <div class="controls">
+                            <% if (stash.subID && stash.subID != '/') { %>
+                                <input type="text" name='subID' value=<%= stash.subID %> />
+                            <% } else { %>
+                                <input type="text" name='subID' placeholder="请输入历史赛季"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                             <button type="submit" class="btn btn-primary" name="btn" value="query">查询</button>
+                             <button type="submit" class="btn btn-primary " name="btn" value="download">下载</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd>
+                                1、仅支持赛季结束24小时后的历史天梯排名。
+                            </dd>
+                        </dl>
+                    </div>
+                    <% if (stash.data && stash.data.length > 0) { %>
+                        <h4>赛季大致结束时间: <%= stash.data[0].id.getTimestamp() %></h4>
+                    <% } %>
+                </form>
+            </div>
+            <div class="span8">
+                <% if (stash.data && stash.data.length > 0) { %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    区服
+                                </th>
+                                <th>
+                                    WUID
+                                </th>
+                                <th>
+                                    名称
+                                </th>
+                                <th>
+                                    排名
+                                </th>
+                                <th>
+                                    战绩
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=1; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].server %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].wuid %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].name %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].rank %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].score %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <% } %>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

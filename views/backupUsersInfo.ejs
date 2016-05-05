@@ -1,0 +1,119 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                             </select>
+                        </div>
+                    </div>
+                    <% if (stash.area & 1) { %>
+                        <div class="control-group">
+                            <label class="control-label">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</label>
+                            <div class="controls">
+                                <select class="form-control" name="version">
+                                    <option value='1'<%= stash.version==1? "selected": "1" %> >安卓</option>
+                                    <option value='2'<%= stash.version==2? "selected": "2" %> >IOS</option>
+                                </select>
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <option value='-1'<%= stash.server==-1? "selected": "-1" %> >全服</option>
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">类型</label>
+                        <div class="controls">
+                            <select class="form-control" name='ope'>
+                                <option value='1'<%= stash.ope==1? "selected": "1" %> >球队详情</option>
+                                 <option value='2'<%= stash.ope==2? "selected": "2" %> >月卡信息</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">球队等级过滤</label>
+                        <div class="controls">
+                            <% if (stash.level) { %>
+                                <input type="text" name='level' value=<%= stash.level %> />
+                            <% } else { %>
+                                <input type="text" name='level' placeholder="请输入所要求最低等级"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">球队VIP过滤</label>
+                        <div class="controls">
+                            <% if (stash.star) { %>
+                                <input type="text" name='vip' value=<%= stash.vip %> />
+                            <% } else { %>
+                                <input type="text" name='vip' placeholder="请输入所要求最低VIP"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">采集日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" name="btn" value="query">查询</button>
+                             <button type="submit" class="btn btn-primary " name="btn" value="download">下载</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd> 1、采集日期，目前仅支持除今天以外的历史数据查询。</dd>
+                            <dd> 2、最低等级过滤为球队查询可选项，不填写或填0为查询所有等级。</dd>
+                            <dd> 3、最低VIP过滤为球队查询可选项，不填写或填0为查询所有VIP玩家。</dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table">
+                    <table class="table">
+                    <% if (!stash.error && stash.data && stash.data.length != 0) { %>
+                        <% if (stash.ope == 1) { %>
+                            <thead><tr><th>编号</th><th>区服</th><th>mid</th><th>wuid</th><th>名称</th><th>level</th><th>VIP</th></tr></thead>
+                            <tbody>
+                                <% stash.data.forEach(function(elem, index){ %>
+                                    <tr><td><%= index+1 %></td><td><%= elem.server %></td><td><%= elem.mid %><td><%= elem.wuid %></td><td><%= elem.name %></td><td><%= elem.level %></td><td><%= elem.vip %></td></tr>    
+                                <% }) %>
+                            </tbody>
+                        <% } else if (stash.ope == 2) { %>
+                            <thead><tr><th>编号</th><th>区服</th><th>mid</th><th>wuid</th><th>名称</th><th>结束日期</th><th>上次领取日期</th><th>领取次数</th></tr></thead>
+                            <tbody>
+                                <% stash.data.forEach(function(elem, index){ %>
+                                    <tr><td><%= index+1 %></td><td><%= elem.server %></td><td><%= elem.mid %></td><td><%= elem.wuid %></td><td><%= elem.name %></td><td><%= elem.end %></td><td><%= elem.la %></td><td><%= elem.c %></td></tr>    
+                                <% }) %>
+                            </tbody>
+                        <% } %>
+                    <% } %>
+                    </table>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

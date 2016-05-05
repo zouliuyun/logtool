@@ -1,0 +1,106 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">类型</label>
+                        <div class="controls">
+                            <select class="form-control" name='ope'>
+                                <option value='1'<%= stash.ope==1? "selected": "1" %> >钻石产出</option>
+                                 <option value='2'<%= stash.ope==2? "selected": "2" %> >钻石消耗</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">采集日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" name="submit" value="query">查询</button>
+                             <button type="submit" class="btn btn-primary " name="btn" value="download">下载</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd>
+                                1、采集日期，目前仅支持除今天以外的历史数据查询。
+                            </dd>
+                            
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    区服
+                                </th>
+                                <th>
+                                    日期
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                                <th>
+                                    人数
+                                </th>
+                                <th>
+                                    总额
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=0; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].server %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].date %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].action %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].count %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].total %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

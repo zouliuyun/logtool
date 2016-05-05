@@ -1,0 +1,88 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">类型</label>
+                        <div class="controls">
+                            <select class="form-control" name='ope'>
+                                <option value='1'<%= stash.ope==1? "selected": "1" %> >装备出售</option>
+                                <option value='2'<%= stash.ope==2? "selected": "2" %> >装备升级</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">w&nbsp;&nbsp;u&nbsp;&nbsp;i&nbsp;&nbsp;d</label>
+                        <div class="controls">
+                            <% if (stash.wuid) { %>
+                                <input type="text" name='wuid' value=<%= stash.wuid %> />
+                            <% } else { %>
+                                <input type="text" name='wuid' placeholder="请输入玩家的wuid"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">开始日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">结束日期</label>
+                        <div class="controls">
+                            <input type="date" name="endDate" value=<%= stash.endDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" name="submit" value="query">查询</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table">
+                        <% if (stash.ope == 1) { %>
+                            <thead><tr><th>编号</th><th>时间</th><th>装备ID</th><th>装备名称</th><th>装备等级</th></tr></thead>
+                            <tbody>
+                                <% stash.data.forEach(function(elem, index){ %>
+                                    <tr><td><%= index + 1 %></td><td><%= elem.time %></td><td><%= elem.id %></td><td><%= elem.name %></td><td><%= elem.level %></td></tr>    
+                                <% }) %>
+                            </tbody>
+                        <% } else if (stash.ope == 2) { %>
+                            <thead><tr><th>编号</th><th>时间</th><th>装备ID</th><th>装备名称</th><th>升级等级</th><th>当前等级</th></tr></thead>
+                            <tbody>
+                                <% stash.data.forEach(function(elem, index){ %>
+                                    <tr><td><%= index + 1 %></td><td><%= elem.time %></td><td><%= elem.id %></td><td><%= elem.name %></td><td><%= elem.inc %></td><td><%= elem.level %></td></tr>    
+                                <% }) %>
+                            </tbody>
+                        <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

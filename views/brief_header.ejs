@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href="/css/nba_css.css" />
+    <link rel='stylesheet' href="/css/bootstrap.min.css" />    
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js" ></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="/js/nba2_script.js" ></script>
+  </head>
+  <body>
+        <div class="container-fluid row-fluid span12">
+            <% if(stash.error){ %>
+                <div class='alert'>
+                    <h4>提示!</h4>
+                    <%- stash.error %>
+                </div> 
+            <% } %>
+        </div>
+        
+        
+            

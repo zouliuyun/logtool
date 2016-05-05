@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= stash.title %></title>
+    <link rel='stylesheet' href="/css/nba_css.css" />
+    <link rel='stylesheet' href="/css/bootstrap.min.css" />    
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js" ></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="/js/nba2_script.js" ></script>
+  </head>
+  <body>
+          <div class="container-fluid row-fluid span12">
+            <div class="navbar navbar-inner container-fluid">
+                <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a class="brand" href="/">NBA2 LOG</a>
+                <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">日志查询<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="queryCommonDataAsWuid">常用查询</a></li>
+                                <li><a href="queryBattleDataAsWuid">战斗查询</a></li>
+                                <li><a href="queryGetCostAsWuid">获得消耗</a></li>
+                                <li><a href="queryGetCardAsWuid">卡牌查询</a></li>
+                                <li><a href="queryNiuDanAsWuid">选秀查询</a></li>
+                                <li><a href="queryGiftPackageAsWuid">礼包查询</a></li>
+                                <li><a href="queryCardTrainAsWuid">球员养成</a></li>
+                                <li><a href="queryEquipAsWuid">装备查询</a></li>
+                                <li><a href="queryLoginInfoAsWuid">登陆信息</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">备库查询<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-submenu">
+                                    <a href="#" tabindex="-1">批量查询</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="backupQueryWuidToMid">WUID查询梦宝谷ID</a></li>
+                                        <li><a href="backupQueryWuidToBase">WUID查询基本信息</a></li>
+                                        <li><a href="backupQueryWuidToRecharge">WUID查询充值信息</a></li>
+                                        <li><a href="backupQueryMidToWuid">梦宝谷ID查询球队信息</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" tabindex="-1">玩家信息</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="backupQueryPersonInfo">个人信息查询</a></li>
+                                        <li><a href="backupQueryCardInfo">卡牌信息查询</a></li>
+                                        <li><a href="backupQueryCoachInfo">教练信息查询</a></li>
+                                        <li><a href="backupQueryItemInfo">装备信息查询</a></li>
+                                        <li><a href="backupQueryPersonByName">名称反查个人信息</a></li>
+                                        <li><a href="backupQueryHeyueInfo">球员合约信息</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="backupStatistics">数据统计</a></li>
+                                <li><a href="backupItemsInfo">道具查询</a></li>
+                                <li><a href="backupUsersInfo">球队查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">每日报表<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="queryDayMoneyDetail">钻石明细</a></li>
+                                <li><a href="queryDayCoinDetail">金币明细</a></li>
+                                <li><a href="queryDayMatchDetail">比赛明细</a></li>
+                                <li><a href="queryDayLegendRemain">主线留存明细</a></li>
+                                <li><a href="queryDayLegendEnter">主线进入明细</a></li>
+                                <li><a href="queryDayPersonMoney">个人钻石统计</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">日志统计<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="statisticRecharge">充值信息统计</a></li>
+                                <li><a href="statisticGiftPackage">活动礼包购买统计</a></li>
+                                <li><a href="statisticNiuDan">选秀情况统计</a></li>
+                                <li><a href="statisticLogin">登陆情况统计</a></li>
+                                <li><a href="statisticMonthCard">月卡购买统计</a></li>
+                                <li><a href="statisticMoney">钻石详情统计</a></li>
+                                <li><a href="statisticOpenServer">开服数据统计</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">赛事查询<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="querySeasonTianTiRank">赛季天梯排名</a></li>
+                                <li><a href="queryMatchInfo">比赛查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">从库查询<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="slaveQueryWuidToMid">wuid查询mid</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="queryLog">帮助<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="helperActionType">玩家操作对照表</a></li>
+                                <li><a href="helperCheckServerLogs">日志入库查询</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <% if(stash.hasLogin) { %>
+                            <li>    <a href="/"><%= stash.username %></a></li>
+                        <% } else { %>
+                            <li>    <a href="login">登录</a></li>
+                        <% } %>
+                        
+                        <li class="divider-vertical"></li>
+                    </ul>
+                </div>
+            </div>
+            <% if(stash.error){ %>
+                <div class='alert'>
+                    <h4>提示!</h4>
+                    <%- stash.error %>
+                </div> 
+            <% } %>
+        </div>
+        

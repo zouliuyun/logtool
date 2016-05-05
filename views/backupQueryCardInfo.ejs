@@ -1,0 +1,144 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <% if (stash.area & 1) { %>
+                        <div class="control-group">
+                            <label class="control-label">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</label>
+                            <div class="controls">
+                                <select class="form-control" name="version">
+                                    <option value='1'<%= stash.version==1? "selected": "1" %> >安卓</option>
+                                    <option value='2'<%= stash.version==2? "selected": "2" %> >IOS</option>
+                                </select>
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="control-group">
+                        <label class="control-label">w&nbsp;&nbsp;u&nbsp;&nbsp;i&nbsp;&nbsp;d</label>
+                        <div class="controls">
+                            <% if (stash.wuid) { %>
+                                <input type="text" name='wuid' value=<%= stash.wuid %> />
+                            <% } else { %>
+                                <input type="text" name='wuid' placeholder="请输入玩家的wuid"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">备库日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                             <button type="submit" class="btn btn-primary " name="btn" value="query">查询详情</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd> 1、采集日期，目前仅支持除今天以外的历史数据查询。</dd>
+                            <dd> 2、特训详情：[内线 中投 三分 干扰 盖帽 抢断 控球 篮板 速度]</dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <% if (stash.data && stash.data.length > 0) { %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    WUID
+                                </th>
+                                <th>
+                                    卡牌ID
+                                </th>
+                                <th>
+                                    卡牌名称
+                                </th>
+                                <th>
+                                    卡牌星级
+                                </th>
+                                <th>
+                                    卡牌品阶
+                                </th>
+                                <th>
+                                    卡牌等级
+                                </th>
+                                <th>
+                                    特训点
+                                </th>
+                                <th>
+                                    特训详情
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=0; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].wuid %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].cardID %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].cardName %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].star %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].quality %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].level %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].txp %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].tx %>
+                                    </td>
+                                    <% if (stash.data[i].career >= 0 && stash.data[i].career < 5) { %>
+                                        <td>主力</td>
+                                    <% } else if (stash.data[i].career >= 5 && stash.data[i].career < 9) { %>
+                                        <td>替补</td>
+                                    <% } else { %>
+                                        <td>未上场</td>
+                                    <% } %>
+                                </tr>
+                            </tbody>
+                        <% } %>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

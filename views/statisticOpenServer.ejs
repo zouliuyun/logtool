@@ -1,0 +1,70 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <% if (stash.area & 1) { %>
+                        <div class="control-group">
+                            <label class="control-label">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</label>
+                            <div class="controls">
+                                <select class="form-control" name="version">
+                                    <option value='1'<%= stash.version==1? "selected": "1" %> >安卓</option>
+                                    <option value='2'<%= stash.version==2? "selected": "2" %> >IOS</option>
+                                </select>
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">开始日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">结束日期</label>
+                        <div class="controls">
+                            <input type="date" name="endDate" value=<%= stash.endDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                             <button type="submit" class="btn btn-primary " name="btn" value="download">下载</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd> 1、开服活动目前包含钻石十连抽、蓝/紫色球员表、20级球队、A品质球员的查询。</dd>
+                            <dd> 2、查询时间可能有些长，请耐心等待。</dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

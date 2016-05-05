@@ -1,0 +1,18 @@
+<%- include header %>
+    <div class="container-fluid row-fluid">
+        <div class="span4"></div>
+        <div class="span4">
+            <form action="login" class="form-signin" role="form", method="post">
+                <h2 class="form-signin-heading">用户登录</h2>
+                <input type="text" name="username" class="form-control" placeholder="请输入用户名" required autofocus>
+                    <div style="height:10px;clear:both;display:block"></div>
+                <input type="password" name="password" class="form-control" placeholder="请输入密码" required>
+                <!--<div class="checkbox">
+                    <label><input type="checkbox" value="remember-me"> 记住登录状态</label>
+                </div>-->
+                <button class="btn btn-lg btn-primary" type="submit" name="submit" value="login">登录</button>
+            </form>
+        </div>
+        <div class="span4"></div>
+    </div>
+<%- include footer %>

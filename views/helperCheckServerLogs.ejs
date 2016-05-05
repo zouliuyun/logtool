@@ -1,0 +1,105 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <option value='-1'<%= stash.server==-1? "selected": "-1" %> >全服</option>
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">查询类型</label>
+                        <div class="controls">
+                            <select class="form-control" name='ope'>
+                                <option value='1'<%= stash.ope==1? "selected": "1" %> >检测漏传</option>
+                                 <option value='2'<%= stash.ope==2? "selected": "2" %> >查询入库</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">查询日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                             <button type="submit" class="btn btn-primary" name="btn" value="query">查询</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd> 1、查询日期为可选项，不选择为查询所有日期。</dd>
+                            <dd> 2、查询日期为入库日期，<font color="red">比游戏日志晚一天</font>，如：5号的游戏数据，入库日期为6号。</dd>
+                            <dd> 3、检测漏传可以查询日志入库过程中失败的情况，<font color="red">源日志缺失的情况监测不到</font>。</dd>
+                            <dd> 4、查询入库可以详细查日志入库情况，正常情况下<font color="red"><b>每个服每天应有三个node的入库记录</b></font>，<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若有缺失说明源日志未找到，请联系<b>liuyun.zou</b>。</dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table">
+                    <% if (stash.data && stash.data.length > 0) { %>
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    区服
+                                </th>
+                                <th>
+                                    日期
+                                </th>
+                                <th>
+                                    入库情况
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=0; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].server %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].date %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].info %>
+                                    </td>
+                            </tbody>
+                        <% } %>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

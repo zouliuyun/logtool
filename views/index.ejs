@@ -1,0 +1,24 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <h2><a href="http://117.74.140.84:3000/" target="_blank">简体主渠道logTool地址</a></h2>
+                <h2><a href="http://115.159.42.192:3000/" target="_blank">应用宝渠道logTool地址</a></h2>
+                <h2><a href="http://54.92.81.75:3000/" target="_blank">繁体版logTool地址</a></h2>
+                <dl>
+                    <dt>
+                        各列说明:
+                    </dt>
+                    <dd> 1、日志查询:  查询个人某个时间段内所做的操作。</dd>
+                    <dd> 2、备库查询:  查询或者统计某天(确切的说是快照时间点)玩家的静态数据。</dd>
+                    <dd> 3、每日报表:  生成日常需要的一些每日基本统计数据。</dd>
+                    <dd> 4、日志统计:  某个时间段内统计做了某些操作的所有玩家信息。</dd>
+                    <dd> 5、赛事查询:  单独放置赛事统计数据。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <% if(stash.hasLogin) { %>
+        
+    <% } %>
+<%- include footer %>

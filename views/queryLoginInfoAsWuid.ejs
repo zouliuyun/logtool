@@ -1,0 +1,104 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" name="server">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服</label>
+                        <div class="controls">
+                            <select class="form-control" name='server'>                    
+                                <% stash.servers.forEach(function(elem){ %>
+                                    <option value=<%= elem.i %> <%= stash.server == elem.i? "selected" : elem.i %> ><%= elem.n %></option>
+                                <% }) %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">w&nbsp;&nbsp;u&nbsp;&nbsp;i&nbsp;&nbsp;d</label>
+                        <div class="controls">
+                            <% if (stash.wuid) { %>
+                                <input type="text" name='wuid' value=<%= stash.wuid %> />
+                            <% } else { %>
+                                <input type="text" name='wuid' placeholder="请输入玩家的wuid"/>
+                            <% } %>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">开始日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">结束日期</label>
+                        <div class="controls">
+                            <input type="date" name="endDate" value=<%= stash.endDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" name="submit" value="query">查询</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table" id="market">
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    账号
+                                </th>
+                                <th>
+                                    登陆时间
+                                </th>
+                                <th>
+                                    事件
+                                </th>
+                                <th>
+                                    数据
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=0; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].userId %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].time %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].eventId %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].data %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include footer %>

@@ -1,0 +1,105 @@
+<%- include header %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span4">
+                <form class="form-horizontal" method="post">
+                    <div class="control-group">
+                        <label class="control-label">平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台</label>
+                        <div class="controls">
+                            <select class="form-control" name="platform">
+                                <% if (stash.area & 1) { %>
+                                    <option value='1'<%= stash.platform==1? "selected": "1" %> >简体版</option>
+                                <% } %>
+                                <% if (stash.area & 2) { %>
+                                    <option value='2'<%= stash.platform==2? "selected": "2" %> >繁体版</option>
+                                <% } %>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">采集日期</label>
+                        <div class="controls">
+                            <input type="date" name="startDate" value=<%= stash.startDate %> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" name="submit" value="query">查询</button>
+                             <button type="submit" class="btn btn-primary " name="btn" value="download">下载</button>
+                        </div>
+                    </div>
+                    <div class="display">
+                        <dl>
+                            <dt>
+                                Note:
+                            </dt>
+                            <dd>
+                                1、本留存数据为5日留存，采样周期为6天<br>
+                                2、流失玩家是指玩家最后一次登陆时间为采样周期第一天，<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未流失玩家是指玩家在包含采样日期及其前四天内有登陆的玩家
+                            </dd>
+                            
+                        </dl>
+                    </div>
+                </form>
+            </div>
+            <div class="span8">
+                <table class="table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    区服
+                                </th>
+                                <th>
+                                    日期
+                                </th>
+                                <th>
+                                    关卡ID
+                                </th>
+                                <th>
+                                    关卡名称
+                                </th>
+                                <th>
+                                    流失人数
+                                </th>
+                                <th>
+                                    未流失人数
+                                </th>
+                            </tr>
+                        </thead>
+                        <% for (var i=0; i<stash.data.length; ++i) { %>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].server %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].date %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].chapterID %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].chapterName %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].missCount %>
+                                    </td>
+                                    <td>
+                                        <%= stash.data[i].remainCount %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include footer %>
