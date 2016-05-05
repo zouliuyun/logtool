@@ -23,5 +23,5 @@
   npm install util<br>  
   npm install validate<br>  
 
-
+参照http://blog.csdn.net/kaitiren/article/details/38513715 设置README.md格式<br> 
 
