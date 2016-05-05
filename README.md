@@ -1,6 +1,7 @@
 # logtool
 ##本地安装nodejs mongodb
-## 通过npm 安装如下库
+##拉代码
+## 工作目录通过npm 安装如下库
 
   npm install async <br>  
   npm install body-parser<br>  
