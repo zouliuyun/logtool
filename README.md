@@ -2,10 +2,10 @@
 ##本地安装nodejs mongodb
 ## 通过npm 安装如下库
 
-  npm install async
-  npm install body-parser
-  npm install connect-mongo
-  npm install cookie-parser
+  npm install async <br>  
+  npm install body-parser<br>  
+  npm install connect-mongo<br>  
+  npm install cookie-parser<br>  
   npm install debug
   npm install ejs
   npm install express
